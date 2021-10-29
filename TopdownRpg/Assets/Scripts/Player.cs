@@ -23,6 +23,13 @@ public class Player : MonoBehaviour
         set { _isRunning = value; }
     }
 
+    private bool _isRolling;
+    public bool IsRolling
+    {
+        get { return _isRolling; }
+        set { _isRolling = value; }
+    }
+
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -33,6 +40,8 @@ public class Player : MonoBehaviour
         OnInput();
 
         OnRun();
+
+        OnRolling();
     }
 
     private void FixedUpdate()
@@ -63,6 +72,20 @@ public class Player : MonoBehaviour
         {
             speed = initialSpeed;
             _isRunning = false;
+        }
+    }
+
+    void OnRolling()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            speed = runSpeed;
+            _isRolling = true;
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            speed = initialSpeed;
+            _isRolling = false;
         }
     }
 
